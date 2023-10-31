@@ -1,0 +1,15 @@
+grasp_traj*/
+graspnetAPI/
+color*
+MinkowskiEngine/
+MiniGPT-4/
+__pycache__/
+RenderOption_2023-10-27-10-36-04.json
+moveit_python/
+pytorch_knn_cuda/
+assets/
+grasp_data
+imgui.ini
+graspness_implementation/
+*.png
+logs/

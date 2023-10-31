@@ -1,0 +1,78 @@
+demo_save_path: grasp_traj_randomsingleobj_singlecam2
+try_grasppose_num: 10
+try_random_objpose_num: 3
+
+
+graspnet:
+  save_files: False
+  dataset_root: /data/datasets/graspnet
+  checkpoint_path: /home/haoran/Projects/GraspingPolicy/graspness_implementation/ckpt/minkuresunet_kinect.tar
+  dump_dir: ./logs/
+  seed_feat_dim: 512
+  camera: kinect
+  num_point: 15000
+  batch_size: 1
+  voxel_size: 0.005
+  collision_thresh: 0.00001
+  voxel_size_cd: 0.01
+  infer: True
+  vis: False
+  scene: '0188'
+  index: '0000'
+
+sapien_env:
+  use_viewer: False
+  time_step: 0.004166666666666667 #0.01
+  control_freq: 20
+  table_height: 0.05
+
+  robot:
+    robot_urdf_path: "assets/robot/panda/panda.urdf"
+  obs:
+    reset_options:
+      - robot_state
+      - obj_state
+      - pc_xyz
+      - pc_rgb
+      - pc_seg
+      - img
+      - pc_save
+      - img_seg
+
+    runtime_options: 
+      - robot_state
+      - obj_state
+      - pc_xyz
+      - pc_rgb
+      - pc_seg
+      - img
+      - pc_save
+      - img_seg
+    save_img_for_debug: True
+    timer: False
+  cams:
+    near: 0.1
+    far: 100
+    width: 640
+    height: 480
+    fov: 35
+    options:
+      - [1.2, 0.00, 1, 0, -40, 0]
+      - [0., 1.1, 1, -90, -40, 0]
+      - [0., -1.1, 1, 90, -40, 0]
+    pc_save_ids: [0,1,2]
+  objs:
+    # - name: beer_can
+    #   mesh_path: /home/haoran/Projects/sapien/SAPIEN/assets/aligned/beer_can/visual_mesh.obj
+    #   pose: [0.0, 0, 0.04]
+    #   scale: [0.5,0.5,0.5]
+    - name: 005_tomato_soup_can
+      mesh_path: /home/haoran/Projects/GraspingPolicy/assets/ycb_all/005_tomato_soup_can/poisson/textured.obj
+      pose: [0.0, 0, 0.04]
+      scale: [1,1,1] #[0.05,0.05,0.05]
+    # - name: champagne
+    #   mesh_path: /home/haoran/Projects/sapien/SAPIEN/assets/aligned/champagne/visual_mesh.obj
+    #   pose: [0.0, 0, 0.04]
+    # - name: steel_ball
+    #   mesh_path: /home/haoran/Projects/sapien/SAPIEN/assets/aligned/steel_ball/visual_mesh.obj
+    #   pose: [0.0, 0, 0.05]
