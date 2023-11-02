@@ -1,12 +1,13 @@
-demo_save_path: grasp_traj_randomsingleobj_singlecam2
-try_grasppose_num: 10
-try_random_objpose_num: 3
-
+demo_save_path: demo_data/random_single_obj1101
+try_grasppose_num: 100
+try_random_objpose_num: 10
+save_video: False
+obj_start: 0
 
 graspnet:
   save_files: False
-  dataset_root: /data/datasets/graspnet
-  checkpoint_path: /home/haoran/Projects/GraspingPolicy/graspness_implementation/ckpt/minkuresunet_kinect.tar
+  dataset_root: ""
+  checkpoint_path: graspness_implementation/ckpt/minkuresunet_kinect.tar
   dump_dir: ./logs/
   seed_feat_dim: 512
   camera: kinect

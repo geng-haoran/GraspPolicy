@@ -6,6 +6,7 @@
   ```shell
     git clone git@github.com:rhett-chen/graspness_implementation.git
     ```
+    Then follow this repo install instruction
     ```shell
     conda create -n grasp python==3.8
     # conda install pytorch==1.9.0 torchvision==0.10.0 torchaudio==0.9.0 cudatoolkit=11.3 -c pytorch -c conda-forge

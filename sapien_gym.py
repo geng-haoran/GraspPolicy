@@ -14,6 +14,7 @@ from PIL import Image
 import ikpy.chain
 import numpy as np
 import ikpy.utils.plot as plot_utilss
+import random as rdm
 
 class GraspEnv(SapienEnv):
     def __init__(self, cfgs):
@@ -77,7 +78,7 @@ class GraspEnv(SapienEnv):
         builder.add_box_collision(half_size=[0.4, 0.4, 0.025])
         builder.add_box_visual(half_size=[0.4, 0.4, 0.025], color=[0.70, 0.70, 0.70])
         self.table = builder.build_kinematic(name='table')
-        self.table.set_pose(Pose([0, 0, self.table_height - 0.05]))
+        self.table.set_pose(Pose([0, 0, self.table_height - 0.075]))
 
 
         self.objs = []
@@ -149,12 +150,12 @@ class GraspEnv(SapienEnv):
         for obj_id, obj_ins in enumerate(self.objs):
             # obj_ins.set_pose(Pose(self.cfgs["objs"][obj_id]["pose"]))
             if random:
-                self.obj_pose_now[obj_id] = Pose([np.random.randn() * 0.2, np.random.randn() * 0.2, 0.04])
+                self.obj_pose_now[obj_id] = Pose([rdm.random() * 0.3, rdm.random() * 0.3, 0.0])
                 obj_ins.set_pose(self.obj_pose_now[obj_id])
             else:
                 obj_ins.set_pose(self.obj_pose_now[obj_id])
-        for i in range(5):
-            self._scene.step()
+        # for i in range(500):
+        self._scene.step()
         return self._get_obs(options = self.cfgs["obs"]["reset_options"])
 
     def _get_obs(self, options = []):

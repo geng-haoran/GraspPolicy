@@ -3,7 +3,14 @@ import sapien.core as sapien
 import gym
 from gym.utils import seeding
 
+def debug(env, qpos):
+    env.robot.set_qpos(qpos)
+    env.render()
 
+    for step in range(3000000000000):
+        if cfgs["sapien_env"]["use_viewer"]: env.render()
+        obs, reward, done, info = env.step()
+        
 class SapienEnv(gym.Env):
     """Superclass for Sapien environments."""
 
