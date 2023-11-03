@@ -197,7 +197,7 @@ for mesh_path in mesh_paths[cfgs['obj_start']:]:
             else:
                 print("Fail")
             success_name = "success" if success_flag else "fail"
-            # import pdb;pdb.set_trace()
+
             if cfgs['save_video']:
                 save_imgs_to_video(output_path = img_root, video_name = success_name)
 
