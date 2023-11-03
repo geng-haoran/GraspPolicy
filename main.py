@@ -20,8 +20,8 @@ def debug(env, qpos):
 
 graspnet = MyGraspNet(cfgs["graspnet"])
 
-mesh_paths = glob.glob(f"/home/haoran/Projects/GraspingPolicy/assets/ycb_all/*/poisson/textured.obj")
-for mesh_path in mesh_paths[13:]:
+mesh_paths = sorted(glob.glob(f"/home/haoran/Projects/GraspingPolicy/assets/ycb_all/*/poisson/textured.obj"))
+for mesh_path in mesh_paths[6:]:
     name = mesh_path.split("/")[-3]
     cfgs["sapien_env"]["objs"][0]["name"] = name
     cfgs["sapien_env"]["objs"][0]["mesh_path"] = mesh_path
@@ -52,7 +52,7 @@ for mesh_path in mesh_paths[13:]:
             obs_traj = []
             total_step = 0
             obs = env.reset()
-            obs_traj.append(obs)
+            # obs_traj.append(obs["img"][0])
             gg_top1 = gg[try_i]
             delta_m = np.array([[0, 0, 1], [0, -1, 0], [1, 0, 0]])
             R.from_quat(env.end_effector.get_pose().q).as_matrix()
@@ -87,7 +87,7 @@ for mesh_path in mesh_paths[13:]:
                     'gripper': [100.0, 100.0]}
                 obs, reward, done, info = env.step(action)
                 total_step += 1
-                obs_traj.append(obs)
+                obs_traj.append(obs["img"][0])
 
             print("finish reaching tmp position")
             
@@ -106,7 +106,7 @@ for mesh_path in mesh_paths[13:]:
                     'gripper': [100.0, 100.0]}
                 obs, reward, done, info = env.step(action)
                 total_step += 1
-                obs_traj.append(obs)
+                obs_traj.append(obs["img"][0])
                 if done:
                     print(f'Done at step {step}')
                     break
@@ -120,7 +120,7 @@ for mesh_path in mesh_paths[13:]:
                     'gripper': [-1.0, -1.0]}
                 obs, reward, done, info = env.step(action)
                 total_step += 1
-                obs_traj.append(obs)
+                obs_traj.append(obs["img"][0])
                 if done:
                     print(f'Done at step {step}')
                     break
@@ -144,18 +144,18 @@ for mesh_path in mesh_paths[13:]:
                     'gripper': [-1.0, -1.0]}
                 obs, reward, done, info = env.step(action)
                 total_step += 1
-                obs_traj.append(obs)
+                obs_traj.append(obs["img"][0])
                 if done:
                     print(f'Done at step {step}')
                     break
             print("finish reaching pre-grasp position")
             if  env.objs[0].get_pose().p[2] >= 0.25 and total_step<=500:
                 print("Success")
-                imgs = [obs["img"][0] for obs in obs_traj]
+                # imgs = [obs["img"][0] for obs in obs_traj]
                 obj_name = env.objs[0].name
                 save_path = cfgs["demo_save_path"]
                 os.makedirs(f"{save_path}/{obj_name}_{episode}", exist_ok=True)
-                save_imgs_to_video(imgs, f"{save_path}/{obj_name}_{episode}")
+                save_imgs_to_video(obs_traj, f"{save_path}/{obj_name}_{episode}")
 
                 os.makedirs(f"{save_path}", exist_ok=True)
                 traj_data = {
@@ -164,7 +164,7 @@ for mesh_path in mesh_paths[13:]:
                     "obj_name": obj_name,
                     "obj_pose": env.obj_pose_now,
                 }
-                np.save(f"{save_path}/{obj_name}_{episode}.npy", obs_traj, allow_pickle=True)
+                # np.save(f"{save_path}/{obj_name}_{episode}.npy", obs_traj, allow_pickle=True)
             else:
                 print("Fail")
                 continue

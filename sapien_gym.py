@@ -149,12 +149,12 @@ class GraspEnv(SapienEnv):
         for obj_id, obj_ins in enumerate(self.objs):
             # obj_ins.set_pose(Pose(self.cfgs["objs"][obj_id]["pose"]))
             if random:
-                self.obj_pose_now[obj_id] = Pose([np.random.randn() * 0.2, np.random.randn() * 0.2, 0.04])
+                self.obj_pose_now[obj_id] = Pose([np.random.randn() * 0.2, np.random.randn() * 0.2, 0.02])
                 obj_ins.set_pose(self.obj_pose_now[obj_id])
             else:
                 obj_ins.set_pose(self.obj_pose_now[obj_id])
-        for i in range(5):
-            self._scene.step()
+        # for i in range(5):
+        self._scene.step()
         return self._get_obs(options = self.cfgs["obs"]["reset_options"])
 
     def _get_obs(self, options = []):

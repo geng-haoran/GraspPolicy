@@ -1,4 +1,4 @@
-demo_save_path: grasp_traj_randomsingleobj_singlecam2
+demo_save_path: grasp_traj_randomsingleobj_singlecam3
 try_grasppose_num: 10
 try_random_objpose_num: 3
 
