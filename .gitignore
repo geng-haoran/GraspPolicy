@@ -13,3 +13,6 @@ imgui.ini
 graspness_implementation/
 *.png
 logs/
+demo_data/
+wandb/
+diffusers/

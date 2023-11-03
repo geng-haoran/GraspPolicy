@@ -1,12 +1,13 @@
-demo_save_path: grasp_traj_randomsingleobj_singlecam3
-try_grasppose_num: 10
-try_random_objpose_num: 3
-
+demo_save_path: demo_data/random_single_obj1101
+try_grasppose_num: 100
+try_random_objpose_num: 10
+save_video: False
+obj_start: 0
 
 graspnet:
   save_files: False
-  dataset_root: /data/datasets/graspnet
-  checkpoint_path: /home/haoran/Projects/GraspingPolicy/graspness_implementation/ckpt/minkuresunet_kinect.tar
+  dataset_root: ""
+  checkpoint_path: graspness_implementation/ckpt/minkuresunet_kinect.tar
   dump_dir: ./logs/
   seed_feat_dim: 512
   camera: kinect
@@ -33,22 +34,22 @@ sapien_env:
       - robot_state
       - obj_state
       - pc_xyz
-      - pc_rgb
-      - pc_seg
-      - img
-      - pc_save
-      - img_seg
+      # - pc_rgb
+      # - pc_seg
+      # - img
+      # - pc_save
+      # - img_seg
 
     runtime_options: 
       - robot_state
       - obj_state
       - pc_xyz
-      - pc_rgb
-      - pc_seg
-      - img
-      - pc_save
-      - img_seg
-    save_img_for_debug: True
+      # - pc_rgb
+      # - pc_seg
+      # - img
+      # - pc_save
+      # - img_seg
+    save_img_for_debug: False
     timer: False
   cams:
     near: 0.1
@@ -67,7 +68,7 @@ sapien_env:
     #   pose: [0.0, 0, 0.04]
     #   scale: [0.5,0.5,0.5]
     - name: 005_tomato_soup_can
-      mesh_path: /home/haoran/Projects/GraspingPolicy/assets/ycb_all/005_tomato_soup_can/poisson/textured.obj
+      mesh_path: assets/ycb_all/005_tomato_soup_can/poisson/textured.obj
       pose: [0.0, 0, 0.04]
       scale: [1,1,1] #[0.05,0.05,0.05]
     # - name: champagne
